@@ -5,9 +5,8 @@ public class Main{
 		Receiver rec = new Receiver();
 		Relay rel = new Relay();
 		Componente[] comps = {t, c, rel, rec};
-		TelegraphSystem tlSys = new TelegramSystem(comps);
+		TelegraphSystem tlSys = new TelegraphSystem(comps);
 
-		if (!tlSys.run())
-			System.out.println("La configuracion del sistema es incorrecta");
+		tlSys.run()
 	}
 }

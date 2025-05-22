@@ -19,43 +19,34 @@ public class TelegraphSystem{
 					confirmation = false;
 			}
 		}
-
 		return confirmation;
 	}
 
-	private boolean connectSystem(){
-		boolean confirmation = true;
+	private void connectSystem(){
 		int c = componentes.length;
 
-		if (confirmation){
-			componentes[0].setNextComp(componentes[1]);
-			componentes[c].setPrevComp(componentes[c-1]);
-			for ( int i = 1; i<componentes.length-1; i++){
-				if (componentes[i+1] < componentes.length)
-					componentes[i].setNextComp(componentes[i+1]);
-				if (componentes[i-1] >= 0)
-					componentes[i].setPrevComp(componentes[i-1]);
-			}
+		componentes[0].setNextComp(componentes[1]);
+		componentes[c].setPrevComp(componentes[c-1]);
+		for ( int i = 1; i<componentes.length-1; i++){
+			if (i+1 < componentes.length)
+				componentes[i].setNextComp(componentes[i+1]);
+			if (i-1 >= 0)
+				componentes[i].setPrevComp(componentes[i-1]);
 		}
-		
-		return confirmation;
-
 	}
 
-	public boolean run(){
-		boolean confirmation = validSequence();
-		if (confirmation){
-			confirmation = connectSystem();
-			if (confirmation){
+	public void run(){
+		if (validSequence()){
+			connectSystem();
+			if (componentes[0].getStatus()){
 				componentes[0].sendSignal();
-				for (int i = 1; i<componentes.length-1&&confirmation; i++)
+				for (int i = 1; i<componentes.length-1; i++){
 					componentes[i].transmit();
+				}
 				componentes[componentes.length].receiveSignal();
 				componentes[componentes.length].displayMessage();
 			}
 		}
-
-		return confirmation;
 	}
 }
 

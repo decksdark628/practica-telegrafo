@@ -1,0 +1,16 @@
+*.class
+
+*.log
+
+*.swp
+*.swo
+
+/target/
+/bin/
+/out/
+
+.DS_Store   # macOS
+Thumbs.db   # Windows
+
+*.ja*
+
